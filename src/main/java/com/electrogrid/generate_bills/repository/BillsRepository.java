@@ -9,8 +9,6 @@ import java.sql.*;
 
 public class BillsRepository {
 
-//    List <Bills> bills;
-
     Connection con = null;
 
     public BillsRepository() {
@@ -32,24 +30,12 @@ public class BillsRepository {
             System.out.println("Database connection is not success!!!");
         }
 
-//        bills = new ArrayList<>();
-//
-//        Bills b1 = new Bills();
-//
-//        b1.setId(001);
-//        b1.setInvoiceNo("00001");
-//        b1.setAccountNo("Elec0001");
-//        b1.setUserName("Chamoth");
-//        b1.setBillAmount("Rs.1000");
-//
-//        bills.add(b1);
-
     }
 
     public List<Bills> getBills(){
 
         List<Bills> bills = new ArrayList<>();
-        String sql = "select * from electrogrid_db.bills";
+        String sql = "SELECT * FROM electrogrid_db.bills";
 
         try {
             Statement st = con.createStatement();
@@ -74,14 +60,12 @@ public class BillsRepository {
             System.out.println("Database cannot get bills!!!");
         }
 
-
         return  bills;
-
     }
 
     public Bills getBill(int id) {
 
-        String sql = "select * from electrogrid_db.bills where id="+id;
+        String sql = "SELECT * FROM electrogrid_db.bills WHERE id="+id;
         Bills b = new Bills();
 
         try {
@@ -106,19 +90,12 @@ public class BillsRepository {
         }
 
         return b;
-
-//        for(Bills b : bills){
-//            if(b.getId() == id){
-//                return b;
-//            }
-//        }
-//        return  null;
     }
 
 
     public void createBill(Bills b1) {
 
-        String sql = "insert into electrogrid_db.bills values (?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO electrogrid_db.bills VALUES (?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, b1.getId());
@@ -133,17 +110,6 @@ public class BillsRepository {
 
             st.executeUpdate();
 
-//            if(rs.next()){
-//                b.setId(rs.getInt(1));
-//                b.setInvoiceNo(rs.getString(2));
-//                b.setAccountNo(rs.getString(3));
-//                b.setUserName(rs.getString(4));
-//                b.setEmail(rs.getString(5));
-//                b.setMobileNo(rs.getString(6));
-//                b.setHome(rs.getString(7));
-//                b.setDate(rs.getString(8));
-//                b.setBillAmount(rs.getString(9));
-//            }
         }
         catch (Exception e) {
             System.out.println("Database cannot add bills!!!");
@@ -170,6 +136,20 @@ public class BillsRepository {
         }
         catch (Exception e) {
             System.out.println("Database cannot update bills!!!");
+        }
+    }
+
+    public void deleteBill(int id) {
+
+        String sql = "DELETE FROM electrogrid_db.bills WHERE id =?";
+        try {
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+            System.out.println("Database successfully delete the bill!!!");
+        }
+        catch (Exception e) {
+            System.out.println("Database cannot delete the bill!!!");
         }
 
     }

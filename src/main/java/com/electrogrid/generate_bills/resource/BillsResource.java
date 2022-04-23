@@ -53,8 +53,18 @@ public class BillsResource {
             repo.updateBill(b1);
         }
         return b1;
-
     }
 
+    @DELETE
+    @Path("bill/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Bills deleteBill(@PathParam("id") int id){
+
+        Bills b = repo.getBill(id);
+        if (b.getId()!=0){
+            repo.deleteBill(id);
+        }
+        return b;
+    }
 
 }
