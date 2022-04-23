@@ -30,13 +30,28 @@ public class BillsResource {
     }
 
     @POST
-    @Path("/bill")
+    @Path("bill")
     @Produces(MediaType.APPLICATION_JSON)
     public Bills createBills(Bills b1){
 
         System.out.println(b1);
         repo.createBill(b1);
+        return b1;
 
+    }
+
+    @PUT
+    @Path("bill")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Bills updateBill(Bills b1){
+
+        System.out.println(b1);
+        if (repo.getBill(b1.getId()).getId()==0) {
+            repo.createBill(b1);
+        }
+        else{
+            repo.updateBill(b1);
+        }
         return b1;
 
     }

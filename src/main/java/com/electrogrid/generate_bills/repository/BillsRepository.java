@@ -151,4 +151,26 @@ public class BillsRepository {
 
     }
 
+    public void updateBill(Bills b1) {
+
+        String sql = "UPDATE electrogrid_db.bills SET invoiceNo=?, accountNo=?, userName=?, email=?, mobileNo=?, home=?, date=?, billAmount=? WHERE id =?";
+        try {
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setString(1, b1.getInvoiceNo());
+            st.setString(2, b1.getAccountNo());
+            st.setString(3, b1.getUserName());
+            st.setString(4, b1.getEmail());
+            st.setString(5, b1.getMobileNo());
+            st.setString(6, b1.getHome());
+            st.setString(7, b1.getDate());
+            st.setString(8, b1.getBillAmount());
+            st.setInt(9, b1.getId());
+
+            st.executeUpdate();
+        }
+        catch (Exception e) {
+            System.out.println("Database cannot update bills!!!");
+        }
+
+    }
 }
