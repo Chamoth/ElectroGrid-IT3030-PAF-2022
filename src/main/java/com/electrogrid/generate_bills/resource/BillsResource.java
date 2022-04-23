@@ -16,8 +16,7 @@ public class BillsResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List <Bills> getBills() {
-        System.out.println("Get Bill 00001");
-
+        System.out.println("Get Bills");
         return repo.getBills();
     }
 
