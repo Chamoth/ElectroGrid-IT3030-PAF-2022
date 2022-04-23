@@ -1,25 +1,46 @@
 package com.electrogrid.generate_bills.resource;
 
 import com.electrogrid.generate_bills.model.Bills;
+import com.electrogrid.generate_bills.repository.BillsRepository;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.Arrays;
+import java.util.List;
 
 @Path("/bills")
 public class BillsResource {
 
+    BillsRepository repo = new BillsRepository();
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Bills getBills() {
+    public List <Bills> getBills() {
         System.out.println("Get Bill 00001");
-        Bills b1 = new Bills();
-        b1.setInvoiceNo("00001");
-        b1.setAccountNo("Elec0001");
-        b1.setUserName("Chamoth");
-        b1.setBillAmount("Rs.1000");
+
+        return repo.getBills();
+    }
+
+    @GET
+    @Path("bill/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Bills getBill(@PathParam("id") int id) {
+
+        return repo.getBill(id);
+
+    }
+
+    @POST
+    @Path("/bill")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Bills createBills(Bills b1){
+
+        System.out.println(b1);
+        repo.createBill(b1);
 
         return b1;
+
     }
+
+
 }

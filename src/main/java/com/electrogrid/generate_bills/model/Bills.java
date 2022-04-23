@@ -2,6 +2,8 @@ package com.electrogrid.generate_bills.model;
 
 public class Bills {
 
+    private int id;
+
     private String invoiceNo;
 
     private String accountNo;
@@ -18,19 +20,15 @@ public class Bills {
 
     private String billAmount;
 
-    public Bills(String invoiceNo, String accountNo, String userName, String email, String mobileNo, String home, String date, String billAmount) {
-        this.invoiceNo = invoiceNo;
-        this.accountNo = accountNo;
-        this.userName = userName;
-        this.email = email;
-        this.mobileNo = mobileNo;
-        this.home = home;
-        this.date = date;
-        this.billAmount = billAmount;
+    public Bills() {
     }
 
-    public Bills() {
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getInvoiceNo() {
@@ -95,5 +93,20 @@ public class Bills {
 
     public void setBillAmount(String billAmount) {
         this.billAmount = billAmount;
+    }
+
+    @Override
+    public String toString() {
+        return "Bills{" +
+                "id=" + id +
+                ", invoiceNo='" + invoiceNo + '\'' +
+                ", accountNo='" + accountNo + '\'' +
+                ", userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                ", mobileNo='" + mobileNo + '\'' +
+                ", home='" + home + '\'' +
+                ", date='" + date + '\'' +
+                ", billAmount='" + billAmount + '\'' +
+                '}';
     }
 }
