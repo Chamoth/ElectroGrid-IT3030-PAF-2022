@@ -74,6 +74,8 @@ public class BillsRepository {
             st.setString(9, b1.getBillAmount());
 
             st.executeUpdate();
+            System.out.println("Database successfully added the bill");
+
         }
         catch (Exception e) {
             System.out.println("Database cannot add bills!!!");
@@ -110,16 +112,18 @@ public class BillsRepository {
                 b.setBillAmount(rs.getString(9));
 
                 bills.add(b);
-                logger.debug("Database get bills!!!");
+                System.out.println("Database successfully all bills");
+//                logger.debug("Database get bills!!!");
 
             }
         }
         catch (Exception e) {
             System.out.println("Database cannot get bills!!!");
-            logger.debug("Database cannot get bills!!!");
+//            logger.debug("Database cannot get bills!!!");
         }
 
         return  bills;
+
     }
 
 
@@ -148,6 +152,8 @@ public class BillsRepository {
                 b.setDate(rs.getString(8));
                 b.setBillAmount(rs.getString(9));
 
+//                System.out.println("Database successfully get the bill");
+
             }
         }
         catch (Exception e) {
@@ -155,6 +161,7 @@ public class BillsRepository {
         }
 
         return b;
+
     }
 
 
@@ -179,10 +186,12 @@ public class BillsRepository {
             st.setInt(9, b1.getId());
 
             st.executeUpdate();
+            System.out.println("Database successfully update the bill");
         }
         catch (Exception e) {
             System.out.println("Database cannot update bills!!!");
         }
+
     }
 
 
@@ -198,7 +207,7 @@ public class BillsRepository {
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, id);
             st.executeUpdate();
-            System.out.println("Database successfully delete the bill!!!");
+            System.out.println("Database successfully delete the bill");
         }
         catch (Exception e) {
             System.out.println("Database cannot delete the bill!!!");
