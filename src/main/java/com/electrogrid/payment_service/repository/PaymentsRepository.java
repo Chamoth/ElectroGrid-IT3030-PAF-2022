@@ -61,10 +61,42 @@ public class PaymentsRepository {
             }
         }
         catch (Exception e) {
-            System.out.println("Database cannot get payments!!!");
+            System.out.println("Database cannot get payments  !");
         }
 
         return  payments;
+    }
+
+    // Get specific payment detail
+    public Payments getPayment(int id) {
+
+        String sql = "SELECT * FROM electrogrid.payment WHERE id="+id;
+        Payments p = new Payments();
+
+        try {
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            if(rs.next()){
+                p.setId(rs.getInt(1));
+                p.setB_id(rs.getString(2));
+                p.setAccount_number(rs.getString(3));
+                p.setC_id(rs.getString(4));
+                p.setC_name(rs.getString(5));
+                p.setAmount(rs.getDouble(6));
+                p.setCard_number(rs.getString(7));
+                p.setBank_name(rs.getString(8));
+                p.setCard_exp_date(rs.getString(9));
+                p.setCvv(rs.getInt(10));
+                p.setDate(rs.getString(11));
+
+            }
+        }
+        catch (Exception e) {
+            System.out.println("Database cannot get a selected payment detail !");
+        }
+
+        return p;
     }
 
    //Insert Payment Details
@@ -90,8 +122,10 @@ public class PaymentsRepository {
 
         }
         catch (Exception e) {
-            System.out.println("Database cannot add Payments!");
+            System.out.println("Database cannot add Payments  !");
         }
     }
+
+    
 
 }
