@@ -33,6 +33,7 @@ public class PaymentsRepository {
 
     }
 
+    //Display All Payment Details
     public List<Payments> getPayments(){
 
         List<Payments> payments = new ArrayList<Payments>();
@@ -64,6 +65,33 @@ public class PaymentsRepository {
         }
 
         return  payments;
+    }
+
+   //Insert Payment Details
+
+    public void createPayment(Payments py){
+
+        String sql = "INSERT INTO electrogrid.payment values (?,?,?,?,?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setInt(1, py.getId());
+            st.setString(2, py.getB_id());
+            st.setString(3, py.getAccount_number());
+            st.setString(4, py.getC_id());
+            st.setString(5, py.getC_name());
+            st.setDouble(6, py.getAmount());
+            st.setString(7, py.getCard_number());
+            st.setString(8, py.getBank_name());
+            st.setString(9, py.getCard_exp_date());
+            st.setInt(10, py.getCvv());
+            st.setString(11, py.getDate());
+
+            st.executeUpdate();
+
+        }
+        catch (Exception e) {
+            System.out.println("Database cannot add Payments!");
+        }
     }
 
 }
