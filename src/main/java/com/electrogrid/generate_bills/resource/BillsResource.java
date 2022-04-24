@@ -10,11 +10,24 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/***
+ *
+ * @author it19976518@my.sliit.lk
+ * Ketipearachchi C. D.
+ *
+ */
+
 @Path("/bills")
 public class BillsResource {
 
     BillsRepository repo = new BillsRepository();
 
+
+    /***
+     *
+     * This method is used to get all bills
+     *
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List <Bills> getBills() {
@@ -22,6 +35,11 @@ public class BillsResource {
         return repo.getBills();
     }
 
+    /***
+     *
+     * This method is used to search bills
+     *
+     */
     @GET
     @Path("bill/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -31,6 +49,11 @@ public class BillsResource {
 
     }
 
+    /***
+     *
+     * This method is used to create bills
+     *
+     */
     @POST
     @Valid
     @Path("bill")

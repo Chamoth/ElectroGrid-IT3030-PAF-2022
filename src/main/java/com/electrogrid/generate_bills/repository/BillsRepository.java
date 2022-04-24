@@ -11,6 +11,13 @@ import java.util.List;
 import java.sql.*;
 import java.util.Properties;
 
+/***
+ *
+ * @author it19976518@my.sliit.lk
+ * Ketipearachchi C. D.
+ *
+ */
+
 public class BillsRepository {
 
     static Logger logger = Logger.getLogger(BillsRepository.class);

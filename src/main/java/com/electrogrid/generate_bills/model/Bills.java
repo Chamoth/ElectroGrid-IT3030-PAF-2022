@@ -2,6 +2,13 @@ package com.electrogrid.generate_bills.model;
 
 import javax.validation.constraints.Pattern;
 
+/***
+ *
+ * @author it19976518@my.sliit.lk
+ * Ketipearachchi C. D.
+ *
+ */
+
 public class Bills {
 
     private int id;
