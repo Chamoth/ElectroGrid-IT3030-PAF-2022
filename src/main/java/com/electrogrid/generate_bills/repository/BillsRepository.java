@@ -13,8 +13,9 @@ import java.util.Properties;
 
 /***
  *
- * @author it19976518@my.sliit.lk
+ * @author IT19976518
  * Ketipearachchi C. D.
+ * it19976518@my.sliit.lk
  *
  */
 
@@ -24,6 +25,12 @@ public class BillsRepository {
 
     Connection con = null;
 
+
+    /***
+     *
+     * In here, declared the database connection and config
+     *
+     */
     public BillsRepository() {
 
         String url = "jdbc:mysql://localhost:3306/electrogrid_db?useSSL=false";
@@ -45,6 +52,41 @@ public class BillsRepository {
 
     }
 
+
+    /***
+     *
+     * This method is used to create bills
+     *
+     */
+    public void createBill(Bills b1) {
+
+        String sql = "INSERT INTO electrogrid_db.bills VALUES (?,?,?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setInt(1, b1.getId());
+            st.setString(2, b1.getInvoiceNo());
+            st.setString(3, b1.getAccountNo());
+            st.setString(4, b1.getUserName());
+            st.setString(5, b1.getEmail());
+            st.setString(6, b1.getMobileNo());
+            st.setString(7, b1.getHome());
+            st.setString(8, b1.getDate());
+            st.setString(9, b1.getBillAmount());
+
+            st.executeUpdate();
+        }
+        catch (Exception e) {
+            System.out.println("Database cannot add bills!!!");
+        }
+
+    }
+
+
+    /***
+     *
+     * This method is used to get all bills at the same time
+     *
+     */
     public List<Bills> getBills(){
 
         List<Bills> bills = new ArrayList<>();
@@ -80,6 +122,12 @@ public class BillsRepository {
         return  bills;
     }
 
+
+    /***
+     *
+     * This method is used to get one bill at a time
+     *
+     */
     public Bills getBill(int id) {
 
         String sql = "SELECT * FROM electrogrid_db.bills WHERE id="+id;
@@ -110,30 +158,11 @@ public class BillsRepository {
     }
 
 
-    public void createBill(Bills b1) {
-
-        String sql = "INSERT INTO electrogrid_db.bills VALUES (?,?,?,?,?,?,?,?,?)";
-        try {
-                PreparedStatement st = con.prepareStatement(sql);
-                st.setInt(1, b1.getId());
-                st.setString(2, b1.getInvoiceNo());
-                st.setString(3, b1.getAccountNo());
-                st.setString(4, b1.getUserName());
-                st.setString(5, b1.getEmail());
-                st.setString(6, b1.getMobileNo());
-                st.setString(7, b1.getHome());
-                st.setString(8, b1.getDate());
-                st.setString(9, b1.getBillAmount());
-
-                st.executeUpdate();
-
-        }
-        catch (Exception e) {
-            System.out.println("Database cannot add bills!!!");
-        }
-
-    }
-
+    /***
+     *
+     * This method is used to update bills
+     *
+     */
     public void updateBill(Bills b1) {
 
         String sql = "UPDATE electrogrid_db.bills SET invoiceNo=?, accountNo=?, userName=?, email=?, mobileNo=?, home=?, date=?, billAmount=? WHERE id =?";
@@ -156,6 +185,12 @@ public class BillsRepository {
         }
     }
 
+
+    /***
+     *
+     * This method is used to delete one bill at a time
+     *
+     */
     public void deleteBill(int id) {
 
         String sql = "DELETE FROM electrogrid_db.bills WHERE id =?";

@@ -4,8 +4,9 @@ import javax.validation.constraints.Pattern;
 
 /***
  *
- * @author it19976518@my.sliit.lk
+ * @author IT19976518
  * Ketipearachchi C. D.
+ * it19976518@my.sliit.lk
  *
  */
 

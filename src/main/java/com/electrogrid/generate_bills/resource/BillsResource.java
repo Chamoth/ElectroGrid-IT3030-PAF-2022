@@ -12,8 +12,9 @@ import java.util.regex.Pattern;
 
 /***
  *
- * @author it19976518@my.sliit.lk
+ * @author IT19976518
  * Ketipearachchi C. D.
+ * it19976518@my.sliit.lk
  *
  */
 
@@ -22,6 +23,25 @@ public class BillsResource {
 
     BillsRepository repo = new BillsRepository();
 
+
+    /***
+     *
+     * This method is used to create bills
+     *
+     */
+    @POST
+    @Valid
+    @Path("bill")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Bills createBills(Bills b1){
+
+//        System.out.println(b1);
+        if(createBills(b1)!= null){
+            repo.createBill(b1);
+        }
+        return b1;
+
+    }
 
     /***
      *
@@ -51,23 +71,9 @@ public class BillsResource {
 
     /***
      *
-     * This method is used to create bills
+     * This method is used to update bills
      *
      */
-    @POST
-    @Valid
-    @Path("bill")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Bills createBills(Bills b1){
-
-//        System.out.println(b1);
-        if(createBills(b1)!= null){
-            repo.createBill(b1);
-        }
-        return b1;
-
-    }
-
     @PUT
     @Path("bill")
     @Produces(MediaType.APPLICATION_JSON)
@@ -92,6 +98,11 @@ public class BillsResource {
 
     }
 
+    /***
+     *
+     * This method is used to delete bills
+     *
+     */
     @DELETE
     @Path("bill/{id}")
     @Produces(MediaType.APPLICATION_JSON)
