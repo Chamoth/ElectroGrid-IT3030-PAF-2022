@@ -19,6 +19,15 @@ public class PaymentsResource {
         return repo.getPayments();
     }
 
+    @GET
+    @Path("payment/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Payments getPayment(@PathParam("id") int id) {
+
+        return repo.getPayment(id);
+
+    }
+
     @POST
     @Path("payment")
     @Produces(MediaType.APPLICATION_JSON)
@@ -29,6 +38,9 @@ public class PaymentsResource {
         return py;
 
     }
+
+
+    
 
 
 }
