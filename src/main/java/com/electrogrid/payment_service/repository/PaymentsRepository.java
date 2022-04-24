@@ -1,0 +1,69 @@
+package com.electrogrid.payment_service.repository;
+
+import com.electrogrid.payment_service.model.Payments;
+
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+import java.sql.*;
+
+
+public class PaymentsRepository {
+
+    Connection con = null;
+
+    public PaymentsRepository() {
+
+        String url = "jdbc:mysql://localhost:3306/electrogrid?useSSL=false";
+        String userName = "root";
+        String password = "root";
+
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver");
+
+            con = DriverManager.getConnection(url, userName, password);
+
+            System.out.println("Database connection is success!!!");
+
+        }
+        catch (Exception e) {
+            System.out.println("Database connection is not success!!!");
+        }
+
+    }
+
+    public List<Payments> getPayments(){
+
+        List<Payments> payments = new ArrayList<Payments>();
+        String sql = "SELECT * FROM electrogrid.payment";
+
+        try {
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while(rs.next()){
+                Payments p = new Payments();
+                p.setId(rs.getInt(1));
+                p.setB_id(rs.getString(2));
+                p.setAccount_number(rs.getString(3));
+                p.setC_id(rs.getString(4));
+                p.setC_name(rs.getString(5));
+                p.setAmount(rs.getDouble(6));
+                p.setCard_number(rs.getString(7));
+                p.setBank_name(rs.getString(8));
+                p.setCard_exp_date(rs.getString(9));
+                p.setCvv(rs.getInt(10));
+                p.setDate(rs.getString(11));
+
+                payments.add(p);
+            }
+        }
+        catch (Exception e) {
+            System.out.println("Database cannot get payments!!!");
+        }
+
+        return  payments;
+    }
+
+}
