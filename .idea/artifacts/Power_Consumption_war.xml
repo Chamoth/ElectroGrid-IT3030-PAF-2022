@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Power_Consumption:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>Power_Consumption</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="Power_Consumption-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Power_Consumption:war exploded" />
+    </root>
+  </artifact>
+</component>
