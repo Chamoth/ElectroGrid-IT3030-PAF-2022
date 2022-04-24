@@ -1,5 +1,7 @@
 package com.electrogrid.generate_bills.model;
 
+import javax.validation.constraints.Pattern;
+
 public class Bills {
 
     private int id;
@@ -10,8 +12,10 @@ public class Bills {
 
     private String userName;
 
+    @Pattern(regexp = "^$|[a-zA-Z0-9_.-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$", message = "is not in valid format")
     private String email;
 
+    @Pattern(regexp = "(^$|([0-9]{10})|(\\+[0-9]{11,20})$)", message = "is not in valid format")
     private String mobileNo;
 
     private String home;

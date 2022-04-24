@@ -1,13 +1,19 @@
 package com.electrogrid.generate_bills.repository;
 
 import com.electrogrid.generate_bills.model.Bills;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
+import java.util.Properties;
 
 public class BillsRepository {
+
+    static Logger logger = Logger.getLogger(BillsRepository.class);
 
     Connection con = null;
 
@@ -38,6 +44,7 @@ public class BillsRepository {
         String sql = "SELECT * FROM electrogrid_db.bills";
 
         try {
+
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
 
@@ -54,10 +61,13 @@ public class BillsRepository {
                 b.setBillAmount(rs.getString(9));
 
                 bills.add(b);
+                logger.debug("Database get bills!!!");
+
             }
         }
         catch (Exception e) {
             System.out.println("Database cannot get bills!!!");
+            logger.debug("Database cannot get bills!!!");
         }
 
         return  bills;
@@ -97,18 +107,18 @@ public class BillsRepository {
 
         String sql = "INSERT INTO electrogrid_db.bills VALUES (?,?,?,?,?,?,?,?,?)";
         try {
-            PreparedStatement st = con.prepareStatement(sql);
-            st.setInt(1, b1.getId());
-            st.setString(2, b1.getInvoiceNo());
-            st.setString(3, b1.getAccountNo());
-            st.setString(4, b1.getUserName());
-            st.setString(5, b1.getEmail());
-            st.setString(6, b1.getMobileNo());
-            st.setString(7, b1.getHome());
-            st.setString(8, b1.getDate());
-            st.setString(9, b1.getBillAmount());
+                PreparedStatement st = con.prepareStatement(sql);
+                st.setInt(1, b1.getId());
+                st.setString(2, b1.getInvoiceNo());
+                st.setString(3, b1.getAccountNo());
+                st.setString(4, b1.getUserName());
+                st.setString(5, b1.getEmail());
+                st.setString(6, b1.getMobileNo());
+                st.setString(7, b1.getHome());
+                st.setString(8, b1.getDate());
+                st.setString(9, b1.getBillAmount());
 
-            st.executeUpdate();
+                st.executeUpdate();
 
         }
         catch (Exception e) {
