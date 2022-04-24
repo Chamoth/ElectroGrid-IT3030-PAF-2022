@@ -153,4 +153,20 @@ public class PaymentsRepository {
         }
     }
 
+    //Delete Payment
+    public void deletePayment(int id) {
+
+        String sql = "DELETE FROM electrogrid.payment WHERE id =?";
+        try {
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+            System.out.println("Successfully Deleted the Payment from Database !");
+        }
+        catch (Exception e) {
+            System.out.println("Database cannot delete the Payment !");
+        }
+
+    }
+
 }
