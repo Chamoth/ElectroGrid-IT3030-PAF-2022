@@ -20,7 +20,7 @@ public class PaymentsResource {
     }
 
     @GET
-    @Path("payment/{id}")
+    @Path("getPayment/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Payments getPayment(@PathParam("id") int id) {
 
@@ -29,7 +29,7 @@ public class PaymentsResource {
     }
 
     @POST
-    @Path("payment")
+    @Path("addPayment")
     @Produces(MediaType.APPLICATION_JSON)
     public Payments createPayment(Payments py){
 
@@ -41,7 +41,7 @@ public class PaymentsResource {
 
 
     @PUT
-    @Path("payment")
+    @Path("updatePayment")
     @Produces(MediaType.APPLICATION_JSON)
     public Payments updatePayment(Payments py){
 
