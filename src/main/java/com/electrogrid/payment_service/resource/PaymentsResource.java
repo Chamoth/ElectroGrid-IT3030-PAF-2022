@@ -40,7 +40,20 @@ public class PaymentsResource {
     }
 
 
-    
+    @PUT
+    @Path("payment")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Payments updatePayment(Payments py){
+
+        System.out.println(py);
+        if (repo.getPayment(py.getId()).getId()==0) {
+            repo.createPayment(py);
+        }
+        else{
+            repo.updatePayment(py);
+        }
+        return py;
+    }
 
 
 }
