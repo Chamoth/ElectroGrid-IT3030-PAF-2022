@@ -56,4 +56,17 @@ public class PaymentsResource {
     }
 
 
+    @DELETE
+    @Path("deletePayment/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Payments deletePayment(@PathParam("id") int id){
+
+        Payments p = repo.getPayment(id);
+        if (p.getId()!=0){
+            repo.deletePayment(id);
+        }
+        return p;
+    }
+
+
 }
