@@ -46,7 +46,7 @@ public class PowerConsumptionRepository {
                 pc.setInvoiceNo(rs.getString(3));
                 pc.setUserName(rs.getString(4));
                 pc.setUsedUnit(rs.getInt(5));
-                pc.setTotalCost(rs.getFloat(6));
+                pc.setTotalCost(rs.getDouble(6));
 
                 powerCon.add(pc);
             }
@@ -75,7 +75,7 @@ public class PowerConsumptionRepository {
                 pc.setInvoiceNo(rs.getString(3));
                 pc.setUserName(rs.getString(4));
                 pc.setUsedUnit(rs.getInt(5));
-                pc.setTotalCost(rs.getFloat(6));
+                pc.setTotalCost(rs.getDouble(6));
 
             }
         }
@@ -87,9 +87,10 @@ public class PowerConsumptionRepository {
     }
 
     //Implementing a method for Create data for Create Operation
-    public void createPowerConsumption(PowerConsumption pc1) {
+    public String createPowerConsumption(PowerConsumption pc1) {
 
         String sql = "INSERT INTO electrogrid_db.powercon VALUES (?,?,?,?,?,?)";
+        String output ="";
         try {
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, pc1.getId());
@@ -97,50 +98,68 @@ public class PowerConsumptionRepository {
             st.setString(3, pc1.getInvoiceNo());
             st.setString(4, pc1.getUserName());
             st.setInt(5, pc1.getUsedUnit());
-            st.setFloat(6, pc1.getTotalCost());
+            int units = pc1.getUsedUnit();
+            double totalC = 0;
+            if(units < 100){
+                totalC = units * 1.20;
+            }else if(units<300){
+                totalC = 100 * 1.20 + (units - 100) * 2;
+            } else if (units > 300) {
+                totalC = 100 * 1.20 + 200 * 2 + (units - 300) * 3;
+            }
+            pc1.setTotalCost(totalC);
 
+            st.setDouble(6, pc1.getTotalCost());
             st.executeUpdate();
-
+            output = "Inserted Successfully !";
         }
         catch (Exception e) {
-            System.out.println("adding data into database went wrong!");
+            output = "adding data into database went wrong!";
+            System.err.println(e.getMessage());
         }
-
+        return output;
     }
 
     //Implementing a method for update data for update operation
-    public void updatePowerConsumption(PowerConsumption pc1) {
+    public String updatePowerConsumption(PowerConsumption pc1) {
 
-        String sql = "UPDATE electrogrid_db.powercon SET accountNo=?, invoiceNo=?, usedUnits=?, totalCost=?, WHERE id =?";
+        String sql = "UPDATE electrogrid_db.powercon SET accountNo=?, invoiceNo=?, userName =?, usedUnits=?, totalCost=? WHERE id =?";
+        String output ="";
         try {
             PreparedStatement st = con.prepareStatement(sql);
             st.setString(1, pc1.getAccountNo());
             st.setString(2, pc1.getInvoiceNo());
             st.setString(3, pc1.getUserName());
             st.setInt(4, pc1.getUsedUnit());
-            st.setFloat(5, pc1.getTotalCost());
-
+            st.setDouble(5, pc1.getTotalCost());
+            st.setInt(6,pc1.getId());
 
             st.executeUpdate();
+            output = "Updated Successfully !";
         }
         catch (Exception e) {
-            System.out.println("Database cannot update Power Consumption details !");
+            output = "Database cannot update Power Consumption details !";
+            System.err.println(e.getMessage());
         }
+        return output;
     }
 
     //Implementing a method for Delete data for delete operation
-    public void deletePowerConsumption(int id) {
+    public String deletePowerConsumption(int id) {
 
         String sql = "DELETE FROM electrogrid_db.powercon WHERE id =?";
+        String output ="";
         try {
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, id);
             st.executeUpdate();
-            System.out.println("Successfully deleted the Power Consumption Entry!!!");
+            //System.out.println("Successfully deleted the Power Consumption Entry!!!");
+            output = "Deleted Successfully !";
         }
         catch (Exception e) {
-            System.out.println("Error While Deleting !");
+            output = "Error While Deleting!";
+            System.err.println(e.getMessage());
         }
-
+    return output;
     }
 }

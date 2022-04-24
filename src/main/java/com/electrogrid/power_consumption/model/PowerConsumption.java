@@ -14,7 +14,7 @@ public class PowerConsumption {
     private int usedUnits;
 
 
-    private float totalCost;
+    private double totalCost;
 
 
     public PowerConsumption() {
@@ -60,11 +60,11 @@ public class PowerConsumption {
         this.usedUnits = usedUnit;
     }
 
-    public float getTotalCost() {
+    public double getTotalCost() {
         return totalCost;
     }
 
-    public void setTotalCost(float totalCost) {
+    public void setTotalCost(double totalCost) {
         this.totalCost = totalCost;
     }
 
