@@ -18,4 +18,17 @@ public class PaymentsResource {
         System.out.println("Get Payments");
         return repo.getPayments();
     }
+
+    @POST
+    @Path("payment")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Payments createPayment(Payments py){
+
+        System.out.println(py);
+        repo.createPayment(py);
+        return py;
+
+    }
+
+
 }
