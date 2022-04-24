@@ -126,6 +126,31 @@ public class PaymentsRepository {
         }
     }
 
-    
+    //Update Payment Details
+    public void updatePayment(Payments py) {
+
+        String sql = "UPDATE electrogrid.payment SET b_id=?, account_number=?, c_id=?, c_name=?, amount=?, card_number=?, bank_name=?, card_exp_date=?, cvv=?, date=? WHERE id =?";
+
+        try {
+            PreparedStatement st = con.prepareStatement(sql);
+
+            st.setString(1, py.getB_id());
+            st.setString(2, py.getAccount_number());
+            st.setString(3, py.getC_id());
+            st.setString(4, py.getC_name());
+            st.setDouble(5, py.getAmount());
+            st.setString(6, py.getCard_number());
+            st.setString(7, py.getBank_name());
+            st.setString(8, py.getCard_exp_date());
+            st.setInt(9, py.getCvv());
+            st.setString(10, py.getDate());
+            st.setInt(11, py.getId());
+
+            st.executeUpdate();
+        }
+        catch (Exception e) {
+            System.out.println("Database cannot update payments  !");
+        }
+    }
 
 }
