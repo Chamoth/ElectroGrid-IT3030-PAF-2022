@@ -24,11 +24,11 @@ public class PaymentsRepository {
 
             con = DriverManager.getConnection(url, userName, password);
 
-            System.out.println("Database connection is success!!!");
+            System.out.println("Database Connected Successfully.....!");
 
         }
         catch (Exception e) {
-            System.out.println("Database connection is not success!!!");
+            System.out.println("Error in Database Connection......!");
         }
 
     }
@@ -61,7 +61,7 @@ public class PaymentsRepository {
             }
         }
         catch (Exception e) {
-            System.out.println("Database cannot get payments  !");
+            System.err.println(e.getMessage());
         }
 
         return  payments;
@@ -93,7 +93,7 @@ public class PaymentsRepository {
             }
         }
         catch (Exception e) {
-            System.out.println("Database cannot get a selected payment detail !");
+            System.err.println(e.getMessage());
         }
 
         return p;
@@ -101,9 +101,10 @@ public class PaymentsRepository {
 
    //Insert Payment Details
 
-    public void createPayment(Payments py){
+    public String createPayment(Payments py){
 
         String sql = "INSERT INTO electrogrid.payment values (?,?,?,?,?,?,?,?,?,?,?)";
+        String output ="";
         try {
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, py.getId());
@@ -120,16 +121,22 @@ public class PaymentsRepository {
 
             st.executeUpdate();
 
+            output = "Payment Inserted Successfully.....!";
+
         }
         catch (Exception e) {
-            System.out.println("Database cannot add Payments  !");
+            output = "Payment Insert Unsuccessfully.....!";
+            System.err.println(e.getMessage());
         }
+        return output;
     }
 
     //Update Payment Details
-    public void updatePayment(Payments py) {
+    public String updatePayment(Payments py) {
 
         String sql = "UPDATE electrogrid.payment SET b_id=?, account_number=?, c_id=?, c_name=?, amount=?, card_number=?, bank_name=?, card_exp_date=?, cvv=?, date=? WHERE id =?";
+
+        String output ="";
 
         try {
             PreparedStatement st = con.prepareStatement(sql);
@@ -147,25 +154,48 @@ public class PaymentsRepository {
             st.setInt(11, py.getId());
 
             st.executeUpdate();
+            output = "Payment Updated Successfully....!";
         }
         catch (Exception e) {
-            System.out.println("Database cannot update payments  !");
+            output = "Payment Update Unsuccessfully.....!";
+            System.err.println(e.getMessage());
         }
+        return output;
     }
 
     //Delete Payment
-    public void deletePayment(int id) {
+
+//    public void deletePayment(int id) {
+//
+//        String sql = "DELETE FROM electrogrid.payment WHERE id =?";
+//        try {
+//            PreparedStatement st = con.prepareStatement(sql);
+//            st.setInt(1, id);
+//            st.executeUpdate();
+//            System.out.println("Payment Deleted Successfully....!");
+//        }
+//        catch (Exception e) {
+//            System.out.println("Payment Delete Unsuccessfully.....!");
+//        }
+//
+//    }
+
+    public String deletePayment(int id) {
 
         String sql = "DELETE FROM electrogrid.payment WHERE id =?";
+        String output ="";
         try {
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, id);
             st.executeUpdate();
-            System.out.println("Successfully Deleted the Payment from Database !");
+
+            output = "Payment Deleted Successfully....!";
         }
         catch (Exception e) {
-            System.out.println("Database cannot delete the Payment !");
+            System.err.println(e.getMessage());
+            output = "Payment Delete Unsuccessfully.....!";
         }
+        return output;
 
     }
 
