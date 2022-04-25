@@ -2,6 +2,7 @@ package com.electrogrid.power_consumption.model;
 
 public class PowerConsumption {
 
+    //implementing variables for create model
     private int id;
 
     private String accountNo;
@@ -10,16 +11,15 @@ public class PowerConsumption {
 
     private String userName;
 
-
     private int usedUnits;
-
 
     private double totalCost;
 
-
+    //implemnting the constructor
     public PowerConsumption() {
     }
 
+    //implementing getters and setter for asssign user inputs for the created variables
     public int getId() {
         return id;
     }
@@ -68,6 +68,7 @@ public class PowerConsumption {
         this.totalCost = totalCost;
     }
 
+    //returning data in string format
     @Override
     public String toString() {
         return "PowerConsumption{" +

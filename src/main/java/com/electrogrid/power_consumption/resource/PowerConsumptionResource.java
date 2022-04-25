@@ -12,6 +12,7 @@ import java.util.List;
 
 @Path("/powerCon")
 public class PowerConsumptionResource {
+    //creating object for store data
     PowerConsumptionRepository repo = new PowerConsumptionRepository();
 
     // read data from data base - Read Operation
@@ -25,7 +26,7 @@ public class PowerConsumptionResource {
         return repo.getPowerConsumptions();
     }
 
-    //if you need to have a success messages
+    //if you need to have a success messages for get operation as well
 
 
 //        String msg = "";
