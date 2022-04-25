@@ -89,9 +89,11 @@ public class PowerConsumptionResource {
         String mg = "";
         if (repo.getPowerConsumption(pc1.getId()).getId()==0) {
             mg = repo.createPowerConsumption(pc1);
+
         }
         else{
             mg = repo.updatePowerConsumption(pc1);
+
         }
         return Response.status(Response.Status.OK).entity(mg) .type(MediaType.APPLICATION_JSON) .build();
 
