@@ -89,7 +89,7 @@ public class PowerConsumptionResource {
         System.out.println(pc1);
         String mg = "";
         if (repo.getPowerConsumption(pc1.getId()).getId()==0) {
-            mg = repo.createPowerConsumption(pc1);
+            mg = repo.updatePowerConsumption(pc1);
 
         }
         else{
