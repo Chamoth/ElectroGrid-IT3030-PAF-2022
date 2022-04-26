@@ -58,9 +58,12 @@ public class BillsRepository {
      * This method is used to create bills
      *
      */
-    public void createBill(Bills b1) {
+    public String createBill(Bills b1) {
 
         String sql = "INSERT INTO electrogrid_db.bills VALUES (?,?,?,?,?,?,?,?,?)";
+
+        String output ="";
+
         try {
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, b1.getId());
@@ -75,11 +78,16 @@ public class BillsRepository {
 
             st.executeUpdate();
             System.out.println("Database successfully added the bill");
+            output = "Inserted Bill Details Saved to the System Successfully";
 
         }
         catch (Exception e) {
             System.out.println("Database cannot add bills!!!");
+            output = "Bill Created UnSuccessful.....!";
+            System.err.println(e.getMessage());
         }
+
+        return output;
 
     }
 
@@ -112,13 +120,14 @@ public class BillsRepository {
                 b.setBillAmount(rs.getString(9));
 
                 bills.add(b);
-                System.out.println("Database successfully all bills");
+//                System.out.println("Database successfully get all bills");
 //                logger.debug("Database get bills!!!");
 
             }
         }
         catch (Exception e) {
             System.out.println("Database cannot get bills!!!");
+            System.err.println(e.getMessage());
 //            logger.debug("Database cannot get bills!!!");
         }
 
@@ -158,6 +167,7 @@ public class BillsRepository {
         }
         catch (Exception e) {
             System.out.println("Database cannot get bill!!!");
+            System.err.println(e.getMessage());
         }
 
         return b;
@@ -170,9 +180,12 @@ public class BillsRepository {
      * This method is used to update bills
      *
      */
-    public void updateBill(Bills b1) {
+    public String updateBill(Bills b1) {
 
         String sql = "UPDATE electrogrid_db.bills SET invoiceNo=?, accountNo=?, userName=?, email=?, mobileNo=?, home=?, date=?, billAmount=? WHERE id =?";
+
+        String output ="";
+
         try {
             PreparedStatement st = con.prepareStatement(sql);
             st.setString(1, b1.getInvoiceNo());
@@ -187,10 +200,15 @@ public class BillsRepository {
 
             st.executeUpdate();
             System.out.println("Database successfully update the bill");
+            output = "Updated Bill Details Saved to the System Successfully";
         }
         catch (Exception e) {
             System.out.println("Database cannot update bills!!!");
+            output = "Bill Updated UnSuccessful.....!";
+            System.err.println(e.getMessage());
         }
+
+        return output;
 
     }
 
@@ -200,18 +218,28 @@ public class BillsRepository {
      * This method is used to delete one bill at a time
      *
      */
-    public void deleteBill(int id) {
+    public String deleteBill(int id) {
 
         String sql = "DELETE FROM electrogrid_db.bills WHERE id =?";
+
+        String output ="";
+
         try {
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, id);
             st.executeUpdate();
             System.out.println("Database successfully delete the bill");
+            output = "Deleted Success";
+
         }
         catch (Exception e) {
             System.out.println("Database cannot delete the bill!!!");
+            output = "Bill Deleted UnSuccessful.....!";
+            System.err.println(e.getMessage());
         }
 
+        return output;
+
     }
+
 }
