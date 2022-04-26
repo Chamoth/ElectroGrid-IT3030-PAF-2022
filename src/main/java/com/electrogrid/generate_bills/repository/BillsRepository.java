@@ -82,7 +82,7 @@ public class BillsRepository {
 
         }
         catch (Exception e) {
-            System.out.println("Database cannot add bills!!!");
+            System.out.println("Database cannot add bill details!!!");
             output = "Bill Created UnSuccessful.....!";
             System.err.println(e.getMessage());
         }

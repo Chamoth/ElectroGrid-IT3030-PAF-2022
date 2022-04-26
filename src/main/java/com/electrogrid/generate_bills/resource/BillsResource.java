@@ -60,8 +60,10 @@ public class BillsResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List <Bills> getBills() {
+
         System.out.println("Getting All Bills");
         return repo.getBills();
+
     }
 
     /***
@@ -73,6 +75,7 @@ public class BillsResource {
     @Path("bill/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Bills getBill(@PathParam("id") int id) {
+
         System.out.println("Getting Specified Bill");
         return repo.getBill(id);
 
